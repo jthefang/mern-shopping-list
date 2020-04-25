@@ -83,3 +83,33 @@ class AppNavbar extends Component {
 
 export default AppNavbar;
 ```
+
+## Deploying to Heroku
+
+- We can just `npm run build` from `client/` to generate a static `build/` folder, which would be ok if this were just a static website
+  - However, we have a whole ass server to run with this app => need Heroku
+- In `server.js` have it serve the client static file if the endpoint is anything other than the `api`
+```js
+//Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+  //Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => { //unless we're hitting the api/items, serve static page
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+```
+- Add script to build the static site on Heroku:
+```js
+//packages.json
+"scripts": {
+  ...
+  "dev": "concurrently \"npm run server\" \"npm run client\"",
+  "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+},
+```
+- Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+  - Command Line: `heroku login`
+  - `heroku create` > Heroku [dashboard](https://dashboard.heroku.com/apps) > Click on the newly created app (weird ass name)
+  - Deploy > Add Heroku repo as a remote git repo (using link they provide)
