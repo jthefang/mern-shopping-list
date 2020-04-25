@@ -113,3 +113,8 @@ if (process.env.NODE_ENV === 'production') {
   - Command Line: `heroku login`
   - `heroku create` > Heroku [dashboard](https://dashboard.heroku.com/apps) > Click on the newly created app (weird ass name)
   - Deploy > Add Heroku repo as a remote git repo (using link they provide)
+    - e.g. `heroku git:remote -a calm-everglades-46956`
+  - `git push heroku master` which should run that post build script
+- Open app in Heroku dashboard!
+- Heroku > Settings > Change domain
+  - point domain to heroku!
