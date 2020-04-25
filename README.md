@@ -13,6 +13,7 @@
 - The React app will go in the `client/` directory 
   - to have front end be able to connect to the backend server (without having to type `axios.get("http://localhost:5000/api/get)`) => put `proxy` in `client/package.json`
   - "proxy": "http://localhost:5000"
+- Build backend => frontend => add Redux => connect to backend
 
 ## Using concurrently
 
